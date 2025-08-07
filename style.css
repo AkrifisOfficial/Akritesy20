@@ -1,0 +1,231 @@
+:root {
+    /* Цвета для светлой темы */
+    --light-bg: #f0f0f0;
+    --light-text: #333;
+    --light-card: #fff;
+    --light-border: #ddd;
+    --light-button: #e44d4d;
+    --light-comment: #f8f8f8;
+    
+    /* Цвета для темной темы */
+    --dark-bg: #1a1a1a;
+    --dark-text: #fff;
+    --dark-card: #333;
+    --dark-border: #444;
+    --dark-button: #e44d4d;
+    --dark-comment: #2a2a2a;
+}
+
+/* Применение темы по умолчанию */
+body {
+    background: var(--dark-bg);
+    color: var(--dark-text);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.light-theme {
+    background: var(--light-bg);
+    color: var(--light-text);
+}
+
+/* Остальные стили */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#theme-toggle, #back-button {
+    padding: 8px 15px;
+    background: var(--dark-button);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+#theme-toggle:hover, #back-button:hover {
+    opacity: 0.8;
+}
+
+#anime-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.anime-card {
+    background: var(--dark-card);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border: 1px solid var(--dark-border);
+}
+
+.light-theme .anime-card {
+    background: var(--light-card);
+    border-color: var(--light-border);
+}
+
+.anime-card:hover {
+    transform: scale(1.05);
+}
+
+.anime-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.anime-card h3 {
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+#player-section {
+    margin-top: 30px;
+}
+
+#video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+}
+
+#video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+#episodes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.episode-btn {
+    padding: 8px 15px;
+    background: var(--dark-button);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.episode-btn:hover {
+    background: #c23a3a;
+}
+
+#comments-section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#comments-section h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Стили для виджета комментариев VK */
+#vk_comments {
+    margin-top: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Адаптация виджета под светлую/тёмную тему */
+body.light-theme #vk_comments {
+    --vk-background: var(--light-card) !important;
+    --vk-text-color: var(--light-text) !important;
+    --vk-border-color: var(--light-border) !important;
+}
+
+body:not(.light-theme) #vk_comments {
+    --vk-background: var(--dark-card) !important;
+    --vk-text-color: var(--dark-text) !important;
+    --vk-border-color: var(--dark-border) !important;
+}
+
+#vk_comments iframe {
+    background: var(--vk-background) !important;
+    color: var(--vk-text-color) !important;
+    border-color: var(--vk-border-color) !important;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Скрываем ненужные элементы */
+.vk__header,
+.vk__submit,
+.vk__sort {
+    display: none !important;
+}
+
+/* Улучшаем отображение комментариев внутри виджета */
+.vk__comment {
+    background: var(--vk-background) !important;
+    color: var(--vk-text-color) !important;
+    border-bottom: 1px solid var(--vk-border-color) !important;
+}
+
+.vk__comment__content {
+    color: var(--vk-text-color) !important;
+}
+
+.vk__comment__date {
+    color: var(--vk-text-color) !important;
+    opacity: 0.7;
+}
+
+.vk__reply {
+    background: var(--vk-background) !important;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    #anime-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .anime-card img {
+        height: 220px;
+    }
+  }
