@@ -182,3 +182,72 @@ body.light-theme {
 .light-theme .anime-card h3 {
     color: var(--light-text);
 }
+/* Стили для переключателя темы */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-btn {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--dark-card);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn i {
+    font-size: 16px;
+    z-index: 2;
+}
+
+.toggle-btn .fa-moon {
+    color: #f1c40f;
+}
+
+.toggle-btn .fa-sun {
+    color: #f39c12;
+}
+
+.toggle-thumb {
+    position: absolute;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    border-radius: 50%;
+    transition: var(--transition);
+    z-index: 1;
+}
+
+#theme-toggle:checked + .toggle-btn .toggle-thumb {
+    transform: translateX(28px);
+    background: #f1c40f;
+}
+
+/* Светлая тема */
+body.light-theme {
+    background: var(--light-bg);
+    color: var(--light-text);
+}
+
+.light-theme .anime-card {
+    background: var(--light-card);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .anime-card h3 {
+    color: var(--light-text);
+}
+
+.light-theme .toggle-btn {
+    background: #ecf0f1;
+}
