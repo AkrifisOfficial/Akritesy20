@@ -54,7 +54,22 @@ function playEpisode(episode) {
             src="https://vk.com/video_ext.php?oid=${episode.vk_owner_id}&id=${episode.vk_video_id}&hash=123abc" 
             allowfullscreen
         ></iframe>
+        // Отправка уведомления в Telegram
+    try {
+        await fetch('http://ваш-сервер:3000/api/notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                animeTitle: currentAnime.title,
+                episodeTitle: episode.title
+            })
+        });
+    } catch (error) {
+        console.error('Ошибка отправки в Telegram:', error);
+    }
+}
     `;
+
 }
 
 // Инициализация
