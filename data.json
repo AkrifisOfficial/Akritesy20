@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "title": "Название аниме 1",
+        "cover": "https://example.com/cover1.jpg",
+        "episodes": [
+            {
+                "title": "Серия 1",
+                "vk_video_id": "45678901",
+                "vk_owner_id": "-12345678"
+            },
+            {
+                "title": "Серия 2",
+                "vk_video_id": "98765432",
+                "vk_owner_id": "-12345678"
+            }
+        ]
+    }
+]
