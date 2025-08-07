@@ -1,340 +1,184 @@
 :root {
-    /* Цвета для светлой темы */
-    --light-bg: #f0f0f0;
-    --light-text: #333;
-    --light-card: #fff;
-    --light-border: #ddd;
-    --light-button: #e44d4d;
-    --light-comment: #f8f8f8;
-    
-    /* Цвета для темной темы */
-    --dark-bg: #1a1a1a;
-    --dark-text: #fff;
-    --dark-card: #333;
-    --dark-border: #444;
-    --dark-button: #e44d4d;
-    --dark-comment: #2a2a2a;
+    --primary: #ff4757;
+    --primary-dark: #e84118;
+    --dark-bg: #1e1e2e;
+    --dark-card: #2d2d42;
+    --dark-text: #f8f8f8;
+    --light-bg: #f5f6fa;
+    --light-card: #ffffff;
+    --light-text: #2f3640;
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Применение темы по умолчанию */
 body {
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0;
+    padding: 0;
     background: var(--dark-bg);
     color: var(--dark-text);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    transition: background 0.3s, color 0.3s;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
-body.light-theme {
-    background: var(--light-bg);
-    color: var(--light-text);
-}
-
-/* Остальные стили */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.controls {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-#theme-toggle, #back-button {
-    padding: 8px 15px;
-    background: var(--dark-button);
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
-
-#theme-toggle:hover, #back-button:hover {
-    opacity: 0.8;
-}
-
+/* Аниме-карточки */
 #anime-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+    padding: 20px;
 }
 
 .anime-card {
     background: var(--dark-card);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s;
-    border: 1px solid var(--dark-border);
-}
-
-.light-theme .anime-card {
-    background: var(--light-card);
-    border-color: var(--light-border);
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    position: relative;
 }
 
 .anime-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.anime-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary);
+    transition: var(--transition);
+}
+
+.anime-card:hover::before {
+    height: 6px;
 }
 
 .anime-card img {
     width: 100%;
-    height: 280px;
+    height: 320px;
     object-fit: cover;
     display: block;
+    transition: var(--transition);
+}
+
+.anime-card:hover img {
+    opacity: 0.9;
 }
 
 .anime-card h3 {
-    padding: 10px;
+    padding: 15px;
     margin: 0;
     text-align: center;
-    font-size: 1.1em;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--dark-text);
 }
 
+/* Плеер */
 #player-section {
-    margin-top: 30px;
+    margin: 40px auto;
+    max-width: 1000px;
+    padding: 0 20px;
 }
 
 #video-container {
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
     aspect-ratio: 16/9;
+    background: #000;
+    position: relative;
 }
 
 #video-container iframe {
     width: 100%;
     height: 100%;
     border: none;
-    border-radius: 8px;
+    display: block;
 }
 
+/* Кнопки серий */
 #episodes {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
-    margin-top: 20px;
+    margin: 30px 0;
+    padding: 0 20px;
 }
 
 .episode-btn {
-    padding: 8px 15px;
-    background: var(--dark-button);
+    padding: 10px 18px;
+    background: var(--primary);
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     color: white;
     cursor: pointer;
-    transition: background 0.3s;
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .episode-btn:hover {
-    background: #c23a3a;
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-#comments-section {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 8px;
+.episode-btn.active {
+    background: var(--primary-dark);
+    box-shadow: 0 0 0 2px white;
 }
 
-#comments-section h3 {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-/* Стили для виджета комментариев VK */
-#vk_comments {
-    margin-top: 20px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Адаптация виджета под светлую/тёмную тему */
-body.light-theme #vk_comments {
-    --vk-background: var(--light-card) !important;
-    --vk-text-color: var(--light-text) !important;
-    --vk-border-color: var(--light-border) !important;
-}
-
-body:not(.light-theme) #vk_comments {
-    --vk-background: var(--dark-card) !important;
-    --vk-text-color: var(--dark-text) !important;
-    --vk-border-color: var(--dark-border) !important;
-}
-
-#vk_comments iframe {
-    background: var(--vk-background) !important;
-    color: var(--vk-text-color) !important;
-    border-color: var(--vk-border-color) !important;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Скрываем ненужные элементы */
-.vk__header,
-.vk__submit,
-.vk__sort {
-    display: none !important;
-}
-
-/* Улучшаем отображение комментариев внутри виджета */
-.vk__comment {
-    background: var(--vk-background) !important;
-    color: var(--vk-text-color) !important;
-    border-bottom: 1px solid var(--vk-border-color) !important;
-}
-
-.vk__comment__content {
-    color: var(--vk-text-color) !important;
-}
-
-.vk__comment__date {
-    color: var(--vk-text-color) !important;
-    opacity: 0.7;
-}
-
-.vk__reply {
-    background: var(--vk-background) !important;
-}
-
-.hidden {
-    display: none;
-}
-
-@media (max-width: 600px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .controls {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
+/* Адаптивность */
+@media (max-width: 768px) {
     #anime-list {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
     }
     
     .anime-card img {
-        height: 220px;
+        height: 240px;
     }
-  }
-/* Основные настройки */
-:root {
-    --primary: #4361ee;
-    --secondary: #3f37c9;
-    --dark: #1a1a2e;
-    --light: #f8f9fa;
-    --accent: #ff7e5f;
-}
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--light);
-    color: var(--dark);
-    line-height: 1.6;
-}
-
-/* Шапка с лого и меню */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background: white;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.logo img {
-    transition: transform 0.3s;
-}
-
-.logo:hover img {
-    transform: rotate(15deg);
-}
-
-nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--dark);
-    font-weight: 600;
-    position: relative;
-    padding: 0.5rem 0;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s;
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-/* Основной контент */
-main {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
-}
-
-/* Подвал */
-footer {
-    text-align: center;
-    padding: 2rem;
-    background: var(--dark);
-    color: white;
-    margin-top: 3rem;
-}
-
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-footer img {
-    opacity: 0.8;
-}
-
-footer p {
-    margin: 0;
-    font-size: 0.9rem;
+    
+    #player-section {
+        margin: 20px 0;
     }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.anime-card {
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.anime-card:nth-child(1) { animation-delay: 0.1s; }
+.anime-card:nth-child(2) { animation-delay: 0.2s; }
+.anime-card:nth-child(3) { animation-delay: 0.3s; }
+/* ... и так далее для большего количества карточек */
+
+/* Тёмная/светлая тема */
+body.light-theme {
+    background: var(--light-bg);
+    color: var(--light-text);
+}
+
+.light-theme .anime-card {
+    background: var(--light-card);
+}
+
+.light-theme .anime-card h3 {
+    color: var(--light-text);
+}
