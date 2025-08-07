@@ -59,3 +59,34 @@ function playEpisode(episode) {
 
 // Инициализация
 loadAnimeData();
+// Инициализация темы
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.classList.toggle('light-theme', savedTheme === 'light');
+    document.getElementById('theme-toggle').checked = savedTheme === 'light';
+}
+
+// Переключение темы
+function setupThemeSwitcher() {
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('change', function() {
+        const isLight = this.checked;
+        document.body.classList.toggle('light-theme', isLight);
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        
+        // Обновляем VK виджет при смене темы
+        if (currentEpisode) {
+            setTimeout(() => loadVKComments(currentEpisode), 300);
+        }
+    });
+}
+
+// Обновите функцию initApp()
+async function initApp() {
+    initTheme(); // Инициализация темы
+    setupThemeSwitcher(); // Настройка переключателя
+    
+    await loadData();
+    setupEventListeners();
+    renderHomePage();
+}
