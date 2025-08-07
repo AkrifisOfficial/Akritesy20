@@ -1,6 +1,23 @@
 :root {
     --primary: #ff4757;
     --primary-dark: #e84118;
+    
+    /* Темная тема */
+    --dark-bg: #1e1e2e;
+    --dark-card: #2d2d42;
+    --dark-text: #f8f8f8;
+    
+    /* Светлая тема */
+    --light-bg: #f5f6fa;
+    --light-card: #ffffff;
+    --light-text: #2f3640;
+    
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+:root {
+    --primary: #ff4757;
+    --primary-dark: #e84118;
     --dark-bg: #1e1e2e;
     --dark-card: #2d2d42;
     --dark-text: #f8f8f8;
