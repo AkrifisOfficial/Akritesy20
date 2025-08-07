@@ -11,9 +11,14 @@ let currentEpisode = null;
 
 // Загрузка данных
 async function loadAnimeData() {
-    const response = await fetch('data.json');
-    const data = await response.json();
-    renderAnimeList(data);
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        renderAnimeList(data);
+    } catch (error) {
+        console.error('Ошибка загрузки данных:', error);
+        animeListEl.innerHTML = '<p>Не удалось загрузить список аниме. Попробуйте позже.</p>';
+    }
 }
 
 // Отображение списка аниме
@@ -68,7 +73,7 @@ function playEpisode(episode) {
 // Загрузка комментариев из ВК
 function loadVKComments(episode) {
     const commentsContainer = document.getElementById('vk_comments');
-    commentsContainer.innerHTML = '';
+    commentsContainer.innerHTML = '<div class="loading">Загрузка комментариев...</div>';
     
     // Генерируем уникальный идентификатор для виджета комментариев
     const pageId = `video_${episode.vk_owner_id}_${episode.vk_video_id}`;
@@ -89,6 +94,10 @@ function loadVKComments(episode) {
 
 // Инициализация виджета комментариев VK
 function initVKWidget(pageId) {
+    // Очищаем контейнер перед инициализацией
+    const commentsContainer = document.getElementById('vk_comments');
+    commentsContainer.innerHTML = '';
+    
     VK.Widgets.Comments('vk_comments', {
         limit: 15,
         attach: false,
