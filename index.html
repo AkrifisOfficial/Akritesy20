@@ -2,61 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-    <title>VexeraDubbing - Главная</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title>VexeraDubbing Player</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Шапка с лого и меню -->
-    <header>
-        <div class="logo">
-            <img src="images/logo.png" alt="VexeraDubbing" width="40">
-            <span>Akritesy</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/">Главная</a></li>
-                <li><a href="/about">О нас</a></li>
-                <li><a href="/contact">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- VK Widgets API -->
-    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 </head>
 <body>
     <header>
         <h1>VexeraDubbing Player</h1>
-        <div class="controls">
-            <button id="theme-toggle">🌙 Темная тема</button>
-            <button id="back-button">← Назад</button>
-        </div>
     </header>
     <main>
         <section id="anime-list"></section>
         <section id="player-section" class="hidden">
             <div id="video-container"></div>
             <div id="episodes"></div>
-            <div id="comments-section">
-                <h3>Комментарии</h3>
-                <div id="vk_comments"></div>
-            </div>
         </section>
     </main>
     <script src="script.js"></script>
-    <!-- Подвал с копирайтом -->
-    <footer>
-        <div class="footer-content">
-            <img src="images/logo.png" alt="Akritesy" width="30">
-            <p>© <span id="year">2024</span> VexeraDubbing. Все права защищены.</p>
-        </div>
-    </footer>
-
-    <!-- Скрипт для автоматического года -->
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
 </body>
 </html>
