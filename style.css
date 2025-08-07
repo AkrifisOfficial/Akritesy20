@@ -268,3 +268,15 @@ body.light-theme {
 .light-theme .toggle-btn {
     background: #ecf0f1;
 }
+/* Дополнения для светлой темы */
+.light-theme .episode-btn {
+    color: white; /* Сохраняем цвет текста кнопок */
+}
+
+.light-theme #video-container {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .section-header {
+    border-bottom-color: #eee;
+}
